@@ -35,7 +35,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Нижний предел интегрирования" />
+                    android:text="Нижний предел интегрирования"/>
 
             </LinearLayout>
 
@@ -64,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_margin="3dp"
+                    android:enabled="false"
                     android:text="Clear"
                     android:textSize="15dp"
                     android:id="@+id/btnClear_a"
@@ -120,6 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_margin="3dp"
+                    android:enabled="false"
                     android:text="Clear"
                     android:textSize="15dp"
                     android:id="@+id/btnClear_b"
@@ -177,6 +179,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_margin="3dp"
+                    android:enabled="false"
                     android:text="Clear"
                     android:textSize="15dp"
                     android:id="@+id/btnClear_n"
@@ -186,6 +189,34 @@
         </LinearLayout>
 
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#eeeeee">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Вычислить: "/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="методом средних прямоугольников"
+                        android:checked="true"/>
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="методом трапеций"/>
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="методом парабол"/>
+                </RadioGroup>
+        </LinearLayout>
 
 
 
@@ -208,7 +239,7 @@
             android:layout_height="40dp"
             android:id="@+id/progressBar"
             android:layout_gravity="bottom|center_horizontal"
-            android:max="400"
+            android:max="100"
             android:progress="0" />
     </LinearLayout>
 
