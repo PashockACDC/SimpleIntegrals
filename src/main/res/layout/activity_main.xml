@@ -134,6 +134,10 @@
 
 
 
+
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -194,7 +198,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#eeeeee">
+            android:background="#eeeeee"
+            android:layout_margin="2dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -202,22 +207,74 @@
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                    <RadioButton
+                    <CheckBox
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="методом средних прямоугольников"
-                        android:checked="true"/>
-                    <RadioButton
+                        android:text="методом средних прямоугольников"/>
+                    <CheckBox
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="методом трапеций"/>
-                    <RadioButton
+                    <CheckBox
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="методом парабол"/>
                 </RadioGroup>
         </LinearLayout>
 
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#eeeeee"
+            android:layout_margin="2dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Выбор подынтегральной функции:"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="3dp">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbFunc1"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/f1"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    android:scaleType="fitStart"
+                    android:layout_gravity="left" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="3dp">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rbFunc2"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/f2"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    android:scaleType="fitStart"
+                    android:layout_gravity="left" />
+            </LinearLayout>
+
+        </LinearLayout>
 
 
 
