@@ -323,7 +323,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/rbFunc11"/>
+                        android:id="@+id/rbFunction1"/>
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -344,7 +344,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/rbFunc22"/>
+                        android:id="@+id/rbFunction2"/>
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
