@@ -270,7 +270,7 @@
                 android:background="#eeeeee"
                 android:layout_margin="2dp"
                 android:layout_below="@+id/rlCalcMethods"
-                android:id="@+id/rrrrrrrrrrrrrrrrrrrrrrrrrrrr">
+                android:id="@+id/rlChooseFunction">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -322,68 +322,108 @@
 
             </RelativeLayout>
 
-            <!-- ЗАГЛУШКА!! УДАЛИТЬ!!!!!!!!! -->
+            <!-- 6 - Результаты вычислений -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="#eeeeee"
                 android:layout_margin="2dp"
-                android:layout_below="@+id/rrrrrrrrrrrrrrrrrrrrrrrrrrrr">
+                android:layout_below="@+id/rlChooseFunction">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=" Выбор подынтегральной функции:"
-                    android:id="@+id/tvChooseFunc11111"/>
+                    android:text=" Результаты вычислений:"
+                    android:id="@+id/tvResults"/>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_margin="3dp"
-                    android:layout_below="@+id/tvChooseFunc11111"
-                    android:id="@+id/llFunc11">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/llFunc111"/>
-                    <ImageView
+                    android:layout_below="@+id/tvResults"
+                    android:id="@+id/rlMethod0">
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/f1"
-                        android:scaleX="1"
-                        android:scaleY="1"
-                        android:scaleType="fitStart"
-                        android:layout_gravity="left" />
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:text="через первообразную:"
+                        android:id="@+id/tv_resbyAntiderivative_above"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" "
+                        android:layout_below="@+id/tv_resbyAntiderivative_above"
+                        android:id="@+id/tv_resbyAntiderivative"/>
+                </RelativeLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_margin="3dp"
-                    android:layout_below="@+id/llFunc11"
-                    android:id="@+id/llFunc222">
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rbFunc222"/>
-                    <ImageView
+                    android:layout_below="@+id/rlMethod0"
+                    android:id="@+id/rlMethod1">
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/f2"
-                        android:scaleX="1"
-                        android:scaleY="1"
-                        android:scaleType="fitStart"
-                        android:layout_gravity="left" />
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:text="методом средних прямоугольников:"
+                        android:id="@+id/tv_resbyMiddleRectangles_above"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" "
+                        android:layout_below="@+id/tv_resbyMiddleRectangles_above"
+                        android:id="@+id/tv_resbyMiddleRectangles"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="3dp"
+                    android:layout_below="@+id/rlMethod1"
+                    android:id="@+id/rlMethod2">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="методом трапеций:"
+                        android:id="@+id/tv_resbyTrapeziums_above"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" "
+                        android:layout_below="@+id/tv_resbyTrapeziums_above"
+                        android:id="@+id/tv_resbyTrapeziums"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="3dp"
+                    android:layout_below="@+id/rlMethod2"
+                    android:id="@+id/rlMethod3">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="методом трапеций:"
+                        android:id="@+id/tv_resbySimpson_above"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" "
+                        android:layout_below="@+id/tv_resbySimpson_above"
+                        android:id="@+id/tv_resbySimpson"/>
+                </RelativeLayout>
 
             </RelativeLayout>
 
 
         </RelativeLayout>
-        <!-- КОНЕЦ ЗАГЛУШКИ  -->
+
+
+
     </ScrollView>
 
 
@@ -394,6 +434,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="bottom|center_vertical"
         android:layout_weight="1"
+        android:visibility="gone"
         android:id="@+id/rl_ContainsprogressBar">
 
         <ProgressBar
