@@ -12,9 +12,44 @@
     android:background="#e0e0e0"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl_ContainsButtonCalculate">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Заполните данные и нажмите ''Вычислить''"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/btn_Calculate"
+                android:layout_toStartOf="@+id/btn_Calculate" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Вычислить"
+                android:id="@+id/btn_Calculate"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_ContainsButtonCalculate"
         android:layout_above="@+id/rl_ContainsprogressBar">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -68,13 +103,12 @@
                             android:layout_weight="50"
                             android:inputType="numberDecimal"
                             android:layout_gravity="left|center_vertical"
-                            android:id="@+id/tv_a" />
+                            android:id="@+id/et_a" />
                     </RelativeLayout>
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:text="Clear"
+                        android:text="Стереть"
                         android:textSize="15dp"
                         android:id="@+id/btnClear_a"
                         android:layout_gravity="left|center_vertical"
@@ -127,8 +161,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:text="Clear"
+                        android:text="Стереть"
                         android:textSize="15dp"
                         android:id="@+id/btnClear_b"
                         android:layout_gravity="left|center_vertical"
@@ -147,7 +180,7 @@
                             android:layout_weight="50"
                             android:inputType="numberDecimal"
                             android:layout_gravity="left|center_vertical"
-                            android:id="@+id/tv_b" />
+                            android:id="@+id/et_b" />
                     </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>
@@ -184,7 +217,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:text="  b = "
+                        android:text="  n = "
                         android:editable="false"
                         android:layout_gravity="left|center_vertical"
                         android:id="@+id/tv_n_"
@@ -195,8 +228,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:text="Clear"
+                        android:text="Стереть"
                         android:textSize="15dp"
                         android:id="@+id/btnClear_n"
                         android:layout_gravity="left|center_vertical"
@@ -215,7 +247,7 @@
                             android:layout_weight="50"
                             android:inputType="numberDecimal"
                             android:layout_gravity="left|center_vertical"
-                            android:id="@+id/tv_n" />
+                            android:id="@+id/et_n" />
                     </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>
@@ -288,7 +320,8 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/rbFunc11"/>
+                        android:checked="true"
+                        android:id="@+id/rbFunction1"/>
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -309,7 +342,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/rbFunc22"/>
+                        android:id="@+id/rbFunction2"/>
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
