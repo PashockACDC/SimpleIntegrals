@@ -24,7 +24,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Заполните данные и нажмите ''Вычислить''"
+                android:text="Заполните данные и нажмите «Вычислить»"
+                android:textSize="16dp"
+                android:textStyle="italic"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -267,6 +269,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=" Вычислить: "
+                    android:textSize="18dp"
+                    android:textStyle="italic"
                     android:id="@+id/tvCalc"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -308,6 +312,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=" Выбор подынтегральной функции:"
+                    android:textSize="18dp"
+                    android:textStyle="italic"
                     android:id="@+id/tvChooseFunc"/>
 
                 <LinearLayout
@@ -368,6 +374,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=" Результаты вычислений:"
+                    android:textSize="18dp"
+                    android:textStyle="italic"
                     android:id="@+id/tvResults"/>
 
                 <RelativeLayout
@@ -385,7 +393,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=" "
+                        android:text=" - "
                         android:layout_below="@+id/tv_resbyAntiderivative_above"
                         android:id="@+id/tv_resbyAntiderivative"/>
                 </RelativeLayout>
@@ -405,7 +413,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=" "
+                        android:text=" - "
                         android:layout_below="@+id/tv_resbyMiddleRectangles_above"
                         android:id="@+id/tv_resbyMiddleRectangles"/>
                 </RelativeLayout>
@@ -425,7 +433,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=" "
+                        android:text=" - "
                         android:layout_below="@+id/tv_resbyTrapeziums_above"
                         android:id="@+id/tv_resbyTrapeziums"/>
                 </RelativeLayout>
@@ -445,7 +453,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=" "
+                        android:text=" - "
                         android:layout_below="@+id/tv_resbySimpson_above"
                         android:id="@+id/tv_resbySimpson"/>
                 </RelativeLayout>
