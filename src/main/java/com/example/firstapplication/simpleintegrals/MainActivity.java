@@ -22,6 +22,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     double res_byMiddleRectangles;
     double res_byTrapeziums;
     double res_bySimpson;
+    boolean f1_choose = true;
+    boolean f2_choose = false;
+    boolean res1_calculated = false;
+    boolean res2_calculated = false;
+    boolean res3_calculated = false;
     TextView tv_resbyAntiderivative;
     TextView tv_resbyMiddleRectangles;
     TextView tv_resbyTrapeziums;
@@ -33,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CheckBox chb_1_byMiddleRectangle;
     CheckBox chb_2_byTrapeziums;
     CheckBox chb_3_bySimpson;
+    boolean method_1_choose = false;
+    boolean method_2_choose = false;
+    boolean method_3_choose = false;
     RadioButton rbFunction1;
     RadioButton rbFunction2;
     ProgressBar progressBar;
@@ -102,13 +110,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.rbFunction1:
+                f1_choose = true;
+                f2_choose = false;
                 rbFunction1.setChecked(true);
                 rbFunction2.setChecked(false);
                 break;
 
             case R.id.rbFunction2:
-                rbFunction2.setChecked(true);
+                f1_choose = false;
+                f2_choose = true;
                 rbFunction1.setChecked(false);
+                rbFunction2.setChecked(true);
+                break;
+
+            /*case R.id.chb_1_byMiddleRectangles:
+                if(chb_1_byMiddleRectangle.isChecked() == true)
+                    method_1_choose = true;
+                else
+                    method_1_choose = false;
+                break;
+
+            case R.id.chb_2_byTrapeziums:
+                if(chb_2_byTrapeziums.isChecked() == true)
+                    method_2_choose = true;
+                else
+                    method_2_choose = false;
+                break;
+
+            case R.id.chb_3_bySimpson:
+                if(chb_3_bySimpson.isChecked() == true)
+                    method_3_choose = true;
+                else
+                    method_3_choose = false;
+                break;*/
+
+            case R.id.btn_Calculate:
+
                 break;
 
         }
