@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Integrals I;
 
-    static int EMPTY_FIELDS = -1;
-    static int EMPTY_FIELD = -2;
-    static int EMPTY_CHOOSEN = -3;
+    final int EMPTY_FIELDS = -1;
+    final int EMPTY_FIELD = -2;
+    final int EMPTY_CHOOSEN = -3;
 
 
     @Override
@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param n кол-во разбиений
      */
     private void Calculate(double a, double b, int n) {
+        I.ChooseFunction(f1_choose);
         I.Calculate(a, b, n);
         tv_resbyAntiderivative.setText(String.valueOf(res_byAntiderivative));
         tv_resbyMiddleRectangles.setText(String.valueOf(res_byMiddleRectangles));
