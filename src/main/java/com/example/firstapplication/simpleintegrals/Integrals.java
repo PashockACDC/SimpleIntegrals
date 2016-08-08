@@ -39,6 +39,19 @@ public class Integrals {
 
 
     /**
+     * Устанавливаем значения
+     * @param a нижний предел интегрирования
+     * @param b верхний предел интегрирования
+     * @param n кол-во разбиений
+     */
+    public void setLimits(double a, double b, int n) {
+        this.a = a;
+        this.b = b;
+        this.n = n;
+    }
+
+
+    /**
      * функция 1
      * @param x
      * @return
@@ -66,7 +79,7 @@ public class Integrals {
     }
 
     /**
-     * первообразная функции 1
+     * первообразная функции 2
      * @param x
      * @return
      */
@@ -82,7 +95,7 @@ public class Integrals {
      * @param n кол-во разбиений
      */
     public void Calculate(double a, double b, int n) {
-        MainActivity.res_byAntiderivative = Calculate_by_antiderivative(a, b, n);
+        MainActivity.res_byAntiderivative = Calculate_by_antiderivative(a, b);
         MainActivity.res_byMiddleRectangles = Calculate_by_middle_rectangle(a, b, n);
         MainActivity.res_bySimpson = Calculate_by_parabolas(a, b, n);
         MainActivity.res_byTrapeziums = Calculate_by_trapezium(a, b, n);
@@ -92,10 +105,9 @@ public class Integrals {
      * точный расчёт по формуле Ньютона
      * @param a нижний предел интегрирования
      * @param b верхний предел интегрирования
-     * @param n кол-во разбиений
      * @return
      */
-    private double Calculate_by_antiderivative(double a, double b, int n) {
+    private double Calculate_by_antiderivative(double a, double b) {
         double res;
         if(f1_choose) {
             res = f1_antiderivative(b) - f1_antiderivative(a);
@@ -160,6 +172,7 @@ public class Integrals {
      * @return
      */
     private double Calculate_by_parabolas(double a, double b, int n) {
+        
         return 0;
     }
 
@@ -174,6 +187,4 @@ public class Integrals {
     private double Calculate_by_trapezium(double a, double b, int n) {
         return 0;
     }
-
-
 }
