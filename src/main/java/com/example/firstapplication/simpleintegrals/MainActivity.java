@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean method_3_choose = false;
     RadioButton rbFunction1;
     RadioButton rbFunction2;
+    ImageView iv_f1;
+    ImageView iv_f2;
     ProgressBar progressBar;
 
     Integrals I;
@@ -74,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         chb_3_bySimpson = (CheckBox)findViewById(R.id.chb_3_bySimpson);
         rbFunction1 = (RadioButton)findViewById(R.id.rbFunction1);
         rbFunction2 = (RadioButton)findViewById(R.id.rbFunction2);
+        iv_f1 = (ImageView)findViewById(R.id.iv_f1);
+        iv_f2 = (ImageView)findViewById(R.id.iv_f2);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
         et_a.setOnClickListener(this);
@@ -92,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         chb_3_bySimpson.setOnClickListener(this);
         rbFunction1.setOnClickListener(this);
         rbFunction2.setOnClickListener(this);
+        iv_f1.setOnClickListener(this);
+        iv_f2.setOnClickListener(this);
 
         I = new Integrals();
     }
@@ -120,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.rbFunction1:
+            case R.id.iv_f1:
                 f1_choose = true;
                 f2_choose = false;
                 rbFunction1.setChecked(true);
@@ -127,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.rbFunction2:
+            case R.id.iv_f2:
                 f1_choose = false;
                 f2_choose = true;
                 rbFunction1.setChecked(false);

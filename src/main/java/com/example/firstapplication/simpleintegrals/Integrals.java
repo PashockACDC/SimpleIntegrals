@@ -172,8 +172,37 @@ public class Integrals {
      * @return
      */
     private double Calculate_by_parabolas(double a, double b, int n) {
-        
-        return 0;
+        double res;
+        double h = (b - a) / n;  //шаг разбиения
+        int i;
+        if (f1_choose) {
+            res = f1(a);
+            res += f1(a + n * h);
+        }
+        else {
+            res = f2(a);
+            res += f2(a + n * h);
+        }
+
+        for (i = 1; i <= n - 1; i++) {
+            if (i % 2 != 0) {
+                if (f1_choose) {
+                    res += 4 * f1(a + i * h);
+                }
+                else {
+                    res += 4 * f2(a + i * h);
+                }
+            }
+            else {
+                if (f1_choose) {
+                    res += 2 * f1(a + i * h);
+                }
+                else {
+                    res += 2 * f2(a + i * h);
+                }
+            }
+        }
+        return h / 3 * res;
     }
 
 
@@ -185,6 +214,24 @@ public class Integrals {
      * @return
      */
     private double Calculate_by_trapezium(double a, double b, int n) {
-        return 0;
+        double res;
+        double h = (b - a) / n;  //шаг разбиения
+        if (f1_choose)
+            res = f1(a) / 2 * (a + 1*h - a);
+        else
+            res = f2(a) / 2 * (a + 1*h - a);
+        int i;
+        for (i=1; i <= n-1; i++)
+        {
+            if (f1_choose)
+                res += f1(a + i*h) * (a + (i+1)*h - (a + (i-1)*h)) / 2;
+            else
+                res += f2(a + i*h) * (a + (i+1)*h - (a + (i-1)*h)) / 2;
+        }
+        if (f1_choose)
+            res += f1(b) * (b - (a + (i-1)*h));
+        else
+            res += f2(b) * (b - (a + (i-1)*h));
+        return res;
     }
 }
