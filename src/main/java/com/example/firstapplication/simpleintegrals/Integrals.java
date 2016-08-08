@@ -1,6 +1,7 @@
 package com.example.firstapplication.simpleintegrals;
 
 
+import android.widget.CheckBox;
 
 /**
  * Created by PashockACDC
@@ -16,9 +17,9 @@ public class Integrals {
 //    double res_bySimpson;
     boolean f1_choose;
     boolean f2_choose;
-    boolean res1_calculated;
-    boolean res2_calculated;
-    boolean res3_calculated;
+    boolean res1_byMiddleRectangle = false;
+    boolean res2_byTrapeziums = false;
+    boolean res3_bySimpson = false;
 
 
     public Integrals() {
@@ -48,6 +49,19 @@ public class Integrals {
         this.a = a;
         this.b = b;
         this.n = n;
+    }
+
+
+    /**
+     * Выбор методов расчёта
+     * @param chb_1_byMiddleRectangle выбран ли метод средних прямоугольников
+     * @param chb_2_byTrapeziums выбран ли метод трапеций
+     * @param chb_3_bySimpson выбран ли метод парабол (метод Симпсона)
+     */
+    public void setChoosenMethods(boolean chb_1_byMiddleRectangle, boolean chb_2_byTrapeziums, boolean chb_3_bySimpson) {
+        this.res1_byMiddleRectangle = chb_1_byMiddleRectangle;
+        this.res2_byTrapeziums = chb_2_byTrapeziums;
+        this.res3_bySimpson = chb_3_bySimpson;
     }
 
 

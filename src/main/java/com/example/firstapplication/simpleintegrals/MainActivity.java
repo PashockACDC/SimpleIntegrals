@@ -176,10 +176,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "Не выбран ни один из методов расчёта", Toast.LENGTH_SHORT).show();
                     break;
                 }
+                progressBar.setVisibility(View.VISIBLE);
                 a = Double.parseDouble(et_a.getText().toString());
                 b = Double.parseDouble(et_b.getText().toString());
                 n = Integer.parseInt(et_n.getText().toString());
                 Calculate(a, b, n);
+                progressBar.setVisibility(View.GONE);
                 break;
 
         }
@@ -212,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void Calculate(double a, double b, int n) {
         I.ChooseFunction(f1_choose);
         I.setLimits(a, b, n);
+        I.setChoosenMethods(method_1_choose, method_2_choose, method_3_choose);
         I.Calculate(a, b, n);
         tv_resbyAntiderivative.setText(String.valueOf(res_byAntiderivative));
         tv_resbyMiddleRectangles.setText(String.valueOf(res_byMiddleRectangles));
