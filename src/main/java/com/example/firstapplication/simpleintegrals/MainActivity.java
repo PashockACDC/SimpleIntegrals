@@ -1,5 +1,6 @@
 package com.example.firstapplication.simpleintegrals;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tv_resbyMiddleRectangles;
     TextView tv_resbyTrapeziums;
     TextView tv_resbySimpson;
+    TextView twTrace;
     Button btn_Clear_a;
     Button btn_Clear_b;
     Button btn_Clear_n;
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_resbyMiddleRectangles = (TextView)findViewById(R.id.tv_resbyMiddleRectangles);
         tv_resbyTrapeziums = (TextView)findViewById(R.id.tv_resbyTrapeziums);
         tv_resbySimpson = (TextView)findViewById(R.id.tv_resbySimpson);
+        twTrace = (TextView)findViewById(R.id.twTrace);
         btn_Clear_a = (Button)findViewById(R.id.btnClear_a);
         btn_Clear_b = (Button)findViewById(R.id.btnClear_b);
         btn_Clear_n = (Button)findViewById(R.id.btnClear_n);
@@ -99,8 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rbFunction2.setOnClickListener(this);
         iv_f1.setOnClickListener(this);
         iv_f2.setOnClickListener(this);
-
-        I = new Integrals();
     }
 
 
@@ -212,14 +213,86 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param n кол-во разбиений
      */
     private void Calculate(double a, double b, int n) {
+        I = new Integrals();
         I.ChooseFunction(f1_choose);
         I.setLimits(a, b, n);
         I.setChoosenMethods(method_1_choose, method_2_choose, method_3_choose);
-        I.Calculate(a, b, n);
-        tv_resbyAntiderivative.setText(String.valueOf(res_byAntiderivative));
-        tv_resbyMiddleRectangles.setText(String.valueOf(res_byMiddleRectangles));
-        tv_resbyTrapeziums.setText(String.valueOf(res_byTrapeziums));
-        tv_resbySimpson.setText(String.valueOf(res_bySimpson));
+        try {
+            MyTask mt = new MyTask();
+            mt.execute();
+            twTrace.setVisibility(View.GONE);
+        }
+        catch (Exception e) {
+            Toast.makeText(this, "Расчёт прерван!", Toast.LENGTH_LONG).show();
+            twTrace.setVisibility(View.VISIBLE);
+            twTrace.setText(e.toString());
+        }
+//        tv_resbyAntiderivative.setText(String.valueOf(res_byAntiderivative));
+//        if(method_1_choose) {
+//            tv_resbyMiddleRectangles.setText(String.valueOf(res_byMiddleRectangles));
+//        }
+//        if(method_2_choose) {
+//            tv_resbyTrapeziums.setText(String.valueOf(res_byTrapeziums));
+//        }
+//        if(method_3_choose) {
+//            tv_resbySimpson.setText(String.valueOf(res_bySimpson));
+//        }
     }
+
+
+
+
+
+
+
+
+
+
+
+    class MyTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                I.Calculate(a, b, n);
+                do_it();
+            }
+            catch (Exception e) {
+
+            }
+
+            return null;
+        }
+
+        private void do_it() {
+            tv_resbyAntiderivative.setText(String.valueOf(res_byAntiderivative));
+            if(method_1_choose) {
+                tv_resbyMiddleRectangles.setText(String.valueOf(res_byMiddleRectangles));
+            }
+            if(method_2_choose) {
+                tv_resbyTrapeziums.setText(String.valueOf(res_byTrapeziums));
+            }
+            if(method_3_choose) {
+                tv_resbySimpson.setText(String.valueOf(res_bySimpson));
+            }
+        }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+
+
 
 }

@@ -370,7 +370,8 @@
                 android:orientation="vertical"
                 android:background="#eeeeee"
                 android:layout_margin="2dp"
-                android:layout_below="@+id/rlChooseFunction">
+                android:layout_below="@+id/rlChooseFunction"
+                android:id="@+id/rlResults">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -461,6 +462,21 @@
                 </RelativeLayout>
 
             </RelativeLayout>
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlResults">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/twTrace" />
+            </RelativeLayout>
+
 
 
         </RelativeLayout>

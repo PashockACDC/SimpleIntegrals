@@ -1,7 +1,6 @@
 package com.example.firstapplication.simpleintegrals;
 
 
-import android.widget.CheckBox;
 
 /**
  * Created by PashockACDC
@@ -20,6 +19,7 @@ public class Integrals {
     boolean res1_byMiddleRectangle = false;
     boolean res2_byTrapeziums = false;
     boolean res3_bySimpson = false;
+    boolean isCalculating = false;
 
 
     public Integrals() {
@@ -32,6 +32,9 @@ public class Integrals {
         boolean res2_calculated = false;
         boolean res3_calculated = false;
     }
+
+
+
 
 
 //    public Integrals(double aa, double bb, int n) {
@@ -109,10 +112,15 @@ public class Integrals {
      * @param n кол-во разбиений
      */
     public void Calculate(double a, double b, int n) {
+        //isCalculating = true;
         MainActivity.res_byAntiderivative = Calculate_by_antiderivative(a, b);
-        MainActivity.res_byMiddleRectangles = Calculate_by_middle_rectangle(a, b, n);
-        MainActivity.res_bySimpson = Calculate_by_parabolas(a, b, n);
-        MainActivity.res_byTrapeziums = Calculate_by_trapezium(a, b, n);
+        if(res1_byMiddleRectangle)
+            MainActivity.res_byMiddleRectangles = Calculate_by_middle_rectangle(a, b, n);
+        if(res2_byTrapeziums)
+            MainActivity.res_bySimpson = Calculate_by_parabolas(a, b, n);
+        if(res3_bySimpson)
+            MainActivity.res_byTrapeziums = Calculate_by_trapezium(a, b, n);
+        //isCalculating = false;
     }
 
     /**
