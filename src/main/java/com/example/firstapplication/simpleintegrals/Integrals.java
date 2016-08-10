@@ -129,17 +129,16 @@ public class Integrals {
      * @param b верхний предел интегрирования
      * @return
      */
-    private double Calculate_by_antiderivative(double a, double b) {
-        double res;
+    public double Calculate_by_antiderivative(double a, double b) {
+        double res = 0;
         if(f1_choose) {
             res = f1_antiderivative(b) - f1_antiderivative(a);
-            return res;
         }
         if(f2_choose) {
             res = f2_antiderivative(b) - f2_antiderivative(a);
-            return res;
         }
-        return 0;
+        MainActivity.res_byAntiderivative = res;
+        return res;
     }
 
     /**
@@ -166,7 +165,7 @@ public class Integrals {
      * @param n кол-во разбиений
      * @return
      */
-    private double Calculate_by_middle_rectangle(double a, double b, int n) {
+    public double Calculate_by_middle_rectangle(double a, double b, int n) {
         double dx;
         double x;
         double sum = 0;
@@ -182,6 +181,38 @@ public class Integrals {
                 sum += f2(x);
         }
         res = dx * sum;
+        MainActivity.res_byMiddleRectangles = res;
+        return res;
+    }
+
+
+    /**
+     * вычисление интеграла методом трапеций
+     * @param a нижний предел интегрирования
+     * @param b верхний предел интегрирования
+     * @param n кол-во разбиений
+     * @return
+     */
+    public double Calculate_by_trapezium(double a, double b, int n) {
+        double res;
+        double h = (b - a) / n;  //шаг разбиения
+        if (f1_choose)
+            res = f1(a) / 2 * (a + 1*h - a);
+        else
+            res = f2(a) / 2 * (a + 1*h - a);
+        int i;
+        for (i=1; i <= n-1; i++)
+        {
+            if (f1_choose)
+                res += f1(a + i*h) * (a + (i+1)*h - (a + (i-1)*h)) / 2;
+            else
+                res += f2(a + i*h) * (a + (i+1)*h - (a + (i-1)*h)) / 2;
+        }
+        if (f1_choose)
+            res += f1(b) * (b - (a + (i-1)*h));
+        else
+            res += f2(b) * (b - (a + (i-1)*h));
+        MainActivity.res_byTrapeziums = res;
         return res;
     }
 
@@ -193,7 +224,7 @@ public class Integrals {
      * @param n кол-во разбиений
      * @return
      */
-    private double Calculate_by_parabolas(double a, double b, int n) {
+    public double Calculate_by_parabolas(double a, double b, int n) {
         double res;
         double h = (b - a) / n;  //шаг разбиения
         int i;
@@ -224,36 +255,9 @@ public class Integrals {
                 }
             }
         }
+        MainActivity.res_bySimpson =h / 3 * res;
         return h / 3 * res;
     }
 
 
-    /**
-     * вычисление интеграла методом трапеций
-     * @param a нижний предел интегрирования
-     * @param b верхний предел интегрирования
-     * @param n кол-во разбиений
-     * @return
-     */
-    private double Calculate_by_trapezium(double a, double b, int n) {
-        double res;
-        double h = (b - a) / n;  //шаг разбиения
-        if (f1_choose)
-            res = f1(a) / 2 * (a + 1*h - a);
-        else
-            res = f2(a) / 2 * (a + 1*h - a);
-        int i;
-        for (i=1; i <= n-1; i++)
-        {
-            if (f1_choose)
-                res += f1(a + i*h) * (a + (i+1)*h - (a + (i-1)*h)) / 2;
-            else
-                res += f2(a + i*h) * (a + (i+1)*h - (a + (i-1)*h)) / 2;
-        }
-        if (f1_choose)
-            res += f1(b) * (b - (a + (i-1)*h));
-        else
-            res += f2(b) * (b - (a + (i-1)*h));
-        return res;
-    }
 }

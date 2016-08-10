@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tv_resbyTrapeziums;
     TextView tv_resbySimpson;
     TextView twTrace;
+    RelativeLayout rlMethod1;
+    RelativeLayout rlMethod2;
+    RelativeLayout rlMethod3;
     Button btn_Clear_a;
     Button btn_Clear_b;
     Button btn_Clear_n;
@@ -70,6 +74,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_resbyMiddleRectangles = (TextView)findViewById(R.id.tv_resbyMiddleRectangles);
         tv_resbyTrapeziums = (TextView)findViewById(R.id.tv_resbyTrapeziums);
         tv_resbySimpson = (TextView)findViewById(R.id.tv_resbySimpson);
+        rlMethod1 = (RelativeLayout)findViewById(R.id.rlMethod1);
+        rlMethod1.setVisibility(View.GONE);
+        rlMethod2 = (RelativeLayout)findViewById(R.id.rlMethod2);
+        rlMethod2.setVisibility(View.GONE);
+        rlMethod3 = (RelativeLayout)findViewById(R.id.rlMethod3);
+        rlMethod3.setVisibility(View.GONE);
         twTrace = (TextView)findViewById(R.id.twTrace);
         btn_Clear_a = (Button)findViewById(R.id.btnClear_a);
         btn_Clear_b = (Button)findViewById(R.id.btnClear_b);
@@ -249,7 +259,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    class MyTask extends AsyncTask<Void, Void, Void> {
+    class MyTask extends AsyncTask<Void, Integer, Void> {
+
+        int count = 0;
 
         @Override
         protected void onPreExecute() {
@@ -261,8 +273,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                I.Calculate(a, b, n);
-                do_it();
+                I.Calculate_by_antiderivative(a, b);
+                publishProgress(1);
+                I.Calculate_by_middle_rectangle(a, b, n);
+                publishProgress(30);
+                I.Calculate_by_trapezium(a, b, n);
+                publishProgress(60);
+                I.Calculate_by_parabolas(a, b, n);
+                publishProgress(90);
             }
             catch (Exception e) {
 
@@ -272,22 +290,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         private void do_it() {
-            tv_resbyAntiderivative.setText(String.valueOf(res_byAntiderivative));
-            if(method_1_choose) {
-                tv_resbyMiddleRectangles.setText(String.valueOf(res_byMiddleRectangles));
-            }
-            if(method_2_choose) {
-                tv_resbyTrapeziums.setText(String.valueOf(res_byTrapeziums));
-            }
-            if(method_3_choose) {
-                tv_resbySimpson.setText(String.valueOf(res_bySimpson));
-            }
+
         }
 
 
         @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            progressBar.setProgress(values[0]);
+        }
+
+        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            tv_resbyAntiderivative.setText(String.valueOf(res_byAntiderivative));
+            if(method_1_choose) {
+                rlMethod1.setVisibility(View.VISIBLE);
+                tv_resbyMiddleRectangles.setText(String.valueOf(res_byMiddleRectangles));
+            } else {
+                rlMethod1.setVisibility(View.GONE);
+            }
+            if(method_2_choose) {
+                rlMethod2.setVisibility(View.VISIBLE);
+                tv_resbyTrapeziums.setText(String.valueOf(res_byTrapeziums));
+            } else {
+                rlMethod2.setVisibility(View.GONE);
+            }
+            if(method_3_choose) {
+                rlMethod3.setVisibility(View.VISIBLE);
+                tv_resbySimpson.setText(String.valueOf(res_bySimpson));
+            } else {
+                rlMethod3.setVisibility(View.GONE);
+            }
             progressBar.setVisibility(View.GONE);
         }
     }
