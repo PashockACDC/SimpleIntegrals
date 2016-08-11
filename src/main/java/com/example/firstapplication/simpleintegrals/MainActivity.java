@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout rlMethod1;
     RelativeLayout rlMethod2;
     RelativeLayout rlMethod3;
+    RelativeLayout rl_ContainsprogressBar;
     Button btn_Clear_a;
     Button btn_Clear_b;
     Button btn_Clear_n;
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iv_f1 = (ImageView)findViewById(R.id.iv_f1);
         iv_f2 = (ImageView)findViewById(R.id.iv_f2);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        rl_ContainsprogressBar = (RelativeLayout)findViewById(R.id.rl_ContainsprogressBar);
 
         et_a.setOnClickListener(this);
         et_b.setOnClickListener(this);
@@ -187,12 +189,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "Не выбран ни один из методов расчёта", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                progressBar.setVisibility(View.VISIBLE);
+                rl_ContainsprogressBar.setVisibility(View.VISIBLE);
                 a = Double.parseDouble(et_a.getText().toString());
                 b = Double.parseDouble(et_b.getText().toString());
                 n = Integer.parseInt(et_n.getText().toString());
                 Calculate(a, b, n);
-                progressBar.setVisibility(View.GONE);
                 break;
 
         }
@@ -266,7 +267,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
+            rl_ContainsprogressBar.setVisibility(View.VISIBLE);
+            progressBar.setIndeterminate(true);
         }
 
 
@@ -274,13 +276,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected Void doInBackground(Void... params) {
             try {
                 I.Calculate_by_antiderivative(a, b);
-                publishProgress(1);
-                I.Calculate_by_middle_rectangle(a, b, n);
-                publishProgress(30);
-                I.Calculate_by_trapezium(a, b, n);
-                publishProgress(60);
-                I.Calculate_by_parabolas(a, b, n);
-                publishProgress(90);
+                //publishProgress(1);
+                if(method_1_choose)
+                    I.Calculate_by_middle_rectangle(a, b, n);
+                //publishProgress(30);
+                if(method_2_choose)
+                    I.Calculate_by_trapezium(a, b, n);
+                //publishProgress(60);
+                if(method_3_choose)
+                    I.Calculate_by_parabolas(a, b, n);
+                //publishProgress(90);
             }
             catch (Exception e) {
 
@@ -322,7 +327,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 rlMethod3.setVisibility(View.GONE);
             }
-            progressBar.setVisibility(View.GONE);
+            rl_ContainsprogressBar.setVisibility(View.GONE);
         }
     }
 
