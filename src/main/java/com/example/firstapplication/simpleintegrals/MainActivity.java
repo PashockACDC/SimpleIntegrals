@@ -1,8 +1,10 @@
 package com.example.firstapplication.simpleintegrals;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,6 +15,9 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DecimalFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tv_resbyMiddleRectangles;
     TextView tv_resbyTrapeziums;
     TextView tv_resbySimpson;
-    TextView twTrace;
+    TextView tvTrace;
     RelativeLayout rlMethod1;
     RelativeLayout rlMethod2;
     RelativeLayout rlMethod3;
@@ -58,9 +63,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Integrals I;
 
-    final int EMPTY_FIELDS = -1;
-    final int EMPTY_FIELD = -2;
-    final int EMPTY_CHOOSEN = -3;
+    final int ERROR_EMPTY_FIELDS = -1;
+    final int ERROR_EMPTY_FIELD = -2;
+    final int ERROR_EMPTY_CHOOSEN = -3;
 
 
     @Override
@@ -76,12 +81,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_resbyTrapeziums = (TextView)findViewById(R.id.tv_resbyTrapeziums);
         tv_resbySimpson = (TextView)findViewById(R.id.tv_resbySimpson);
         rlMethod1 = (RelativeLayout)findViewById(R.id.rlMethod1);
-        rlMethod1.setVisibility(View.GONE);
         rlMethod2 = (RelativeLayout)findViewById(R.id.rlMethod2);
-        rlMethod2.setVisibility(View.GONE);
         rlMethod3 = (RelativeLayout)findViewById(R.id.rlMethod3);
-        rlMethod3.setVisibility(View.GONE);
-        twTrace = (TextView)findViewById(R.id.twTrace);
+        tvTrace = (TextView)findViewById(R.id.tvTrace);
         btn_Clear_a = (Button)findViewById(R.id.btnClear_a);
         btn_Clear_b = (Button)findViewById(R.id.btnClear_b);
         btn_Clear_n = (Button)findViewById(R.id.btnClear_n);
@@ -156,43 +158,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.chb_1_byMiddleRectangles:
-                if(chb_1_byMiddleRectangle.isChecked() == true)
+                if(chb_1_byMiddleRectangle.isChecked())
                     method_1_choose = true;
                 else
                     method_1_choose = false;
                 break;
 
             case R.id.chb_2_byTrapeziums:
-                if(chb_2_byTrapeziums.isChecked() == true)
+                if(chb_2_byTrapeziums.isChecked())
                     method_2_choose = true;
                 else
                     method_2_choose = false;
                 break;
 
             case R.id.chb_3_bySimpson:
-                if(chb_3_bySimpson.isChecked() == true)
+                if(chb_3_bySimpson.isChecked())
                     method_3_choose = true;
                 else
                     method_3_choose = false;
                 break;
 
             case R.id.btn_Calculate:
-                if(isDataEmpty() == EMPTY_FIELDS) {
+                if(isDataEmpty() == ERROR_EMPTY_FIELDS) {
                     Toast.makeText(this, "Поля пусты", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if(isDataEmpty() == EMPTY_FIELD) {
+                if(isDataEmpty() == ERROR_EMPTY_FIELD) {
                     Toast.makeText(this, "Одно или несколько полей пусты", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                if(isDataEmpty() == EMPTY_CHOOSEN) {
+                if(isDataEmpty() == ERROR_EMPTY_CHOOSEN) {
                     Toast.makeText(this, "Не выбран ни один из методов расчёта", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 rl_ContainsprogressBar.setVisibility(View.VISIBLE);
-                a = Double.parseDouble(et_a.getText().toString());
-                b = Double.parseDouble(et_b.getText().toString());
-                n = Integer.parseInt(et_n.getText().toString());
+                try {
+                    a = Double.parseDouble(et_a.getText().toString());
+                    b = Double.parseDouble(et_b.getText().toString());
+                    n = Integer.parseInt(et_n.getText().toString());
+                }
+                catch (NumberFormatException e) {
+                    Toast.makeText(this, "Неверный формат одного из чисел!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                catch (Exception e) {
+                    Toast.makeText(this, "Ошибка ввода!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                finally {
+                    rl_ContainsprogressBar.setVisibility(View.GONE);
+                }
                 Calculate(a, b, n);
                 break;
 
@@ -202,17 +217,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * Проверка на пустоту полей
-     * @return EMPTY_FIELDS = -1 - все поля пустые
-     * EMPTY_FIELD = -2 - одно или несколько полей пустые
-     * EMPTY_CHOOSEN = -3 - не выбран ни один из методов расчёта
+     * @return ERROR_EMPTY_FIELDS = -1 - все поля пустые
+     * ERROR_EMPTY_FIELD = -2 - одно или несколько полей пустые
+     * ERROR_EMPTY_CHOOSEN = -3 - не выбран ни один из методов расчёта
      */
     public int isDataEmpty() {
         if(et_a.getText().length() == 0 && et_b.getText().length() == 0 && et_n.getText().length() == 0)
-            return EMPTY_FIELDS;
+            return ERROR_EMPTY_FIELDS;
         if(et_a.getText().length() == 0 || et_b.getText().length() == 0 || et_n.getText().length() == 0)
-            return EMPTY_FIELD;
-        if(method_1_choose == false && method_2_choose == false && method_3_choose == false)
-            return EMPTY_CHOOSEN;
+            return ERROR_EMPTY_FIELD;
+        if(!method_1_choose && !method_2_choose && !method_3_choose)
+            return ERROR_EMPTY_CHOOSEN;
         return 0;
     }
 
@@ -231,12 +246,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             MyTask mt = new MyTask();
             mt.execute();
-            twTrace.setVisibility(View.GONE);
+            tvTrace.setVisibility(View.GONE);
         }
         catch (Exception e) {
             Toast.makeText(this, "Расчёт прерван!", Toast.LENGTH_LONG).show();
-            twTrace.setVisibility(View.VISIBLE);
-            twTrace.setText(e.toString());
+            tvTrace.setVisibility(View.VISIBLE);
+            tvTrace.setText(e.toString());
         }
 //        tv_resbyAntiderivative.setText(String.valueOf(res_byAntiderivative));
 //        if(method_1_choose) {
@@ -251,7 +266,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
+    public void showCalculatingTime(Long millis) {
+        String time_calc;
+        DecimalFormat sec_format = new DecimalFormat("###.###");
+        if((millis / 1000.) >= 60.) {
+            int min = (int)((millis / 1000.) / 60);
+            long seconds = ((millis / 1000L) - min * 60);
+            time_calc = "Время расчёта: " + min + " мин. " + sec_format.format(seconds) + " c";
+        }
+        else {
+            time_calc = "Время расчёта: " + sec_format.format(millis / 1000.) + " c";
+        }
+        Toast.makeText(this, time_calc, Toast.LENGTH_LONG).show();
+    }
 
 
 
@@ -262,40 +289,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     class MyTask extends AsyncTask<Void, Integer, Void> {
 
-        int count = 0;
+        long time_Calc = 0;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             rl_ContainsprogressBar.setVisibility(View.VISIBLE);
-            progressBar.setIndeterminate(true);
+            //progressBar.setIndeterminate(true);
         }
 
 
         @Override
         protected Void doInBackground(Void... params) {
             try {
+                long time_begin = System.currentTimeMillis();
                 I.Calculate_by_antiderivative(a, b);
-                //publishProgress(1);
+                publishProgress(1);
                 if(method_1_choose)
                     I.Calculate_by_middle_rectangle(a, b, n);
-                //publishProgress(30);
+                publishProgress(30);
                 if(method_2_choose)
                     I.Calculate_by_trapezium(a, b, n);
-                //publishProgress(60);
+                publishProgress(60);
                 if(method_3_choose)
                     I.Calculate_by_parabolas(a, b, n);
-                //publishProgress(90);
+                publishProgress(90);
+                long time_end = System.currentTimeMillis();
+                time_Calc = time_end - time_begin;
             }
             catch (Exception e) {
 
             }
 
             return null;
-        }
-
-        private void do_it() {
-
         }
 
 
@@ -306,8 +332,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(Void param) {
+            super.onPostExecute(param);
             tv_resbyAntiderivative.setText(String.valueOf(res_byAntiderivative));
             if(method_1_choose) {
                 rlMethod1.setVisibility(View.VISIBLE);
@@ -327,6 +353,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 rlMethod3.setVisibility(View.GONE);
             }
+            showCalculatingTime(time_Calc);
             rl_ContainsprogressBar.setVisibility(View.GONE);
         }
     }

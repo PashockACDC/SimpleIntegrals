@@ -255,7 +255,7 @@ public class Integrals {
                 }
             }
         }
-        MainActivity.res_bySimpson =h / 3 * res;
+        MainActivity.res_bySimpson = h / 3 * res;
         return h / 3 * res;
     }
 

@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Simple Integrals</string>
+    <string name="label_FillAndPressCalc"> Заполните данные и нажмите «Вычислить»</string>
+    <string name="btn_Calculate">Вычислить</string>
+    <string name="label_LowLimit"> Нижний предел интегрирования</string>
+    <string name="btn_Clear">Стереть</string>
+    <string name="label_UpperLimit"> Верхний предел интегрирования</string>
+    <string name="label_Nodes"> Количество разбиений</string>
+    <string name="label_Calculate"> Вычислить:</string>
+    <string name="label_byMiddleRectangles">методом средних прямоугольников</string>
+    <string name="label_byTrapeziums">методом трапеций</string>
+    <string name="label_bySimpson">методом парабол</string>
+    <string name="label_ChooseFunc"> Выбор подынтегральной функции:</string>
+    <string name="label_Results"> Результаты вычислений:</string>
+    <string name="label_resbyAntiderivative">через первообразную:</string>
+    <string name="label_resbyMiddleRectangles_above">методом средних прямоугольников:</string>
+    <string name="label_resbyTrapeziums">методом трапеций:</string>
+    <string name="label_resbySimpson">методом парабол (метод Симпсона):</string>
 </resources>
