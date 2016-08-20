@@ -206,6 +206,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return;
                 }
                 finally {
+                    if (n == 0) {
+                        Toast.makeText(this, "Нулевое количество разбиений не имеет смысла!", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
                     rl_ContainsprogressBar.setVisibility(View.GONE);
                 }
                 Calculate(a, b, n);
@@ -253,16 +257,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tvTrace.setVisibility(View.VISIBLE);
             tvTrace.setText(e.toString());
         }
-//        tv_resbyAntiderivative.setText(String.valueOf(res_byAntiderivative));
-//        if(method_1_choose) {
-//            tv_resbyMiddleRectangles.setText(String.valueOf(res_byMiddleRectangles));
-//        }
-//        if(method_2_choose) {
-//            tv_resbyTrapeziums.setText(String.valueOf(res_byTrapeziums));
-//        }
-//        if(method_3_choose) {
-//            tv_resbySimpson.setText(String.valueOf(res_bySimpson));
-//        }
     }
 
 
@@ -295,7 +289,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPreExecute() {
             super.onPreExecute();
             rl_ContainsprogressBar.setVisibility(View.VISIBLE);
-            //progressBar.setIndeterminate(true);
         }
 
 
