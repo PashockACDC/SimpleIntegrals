@@ -74,7 +74,7 @@ public class Integrals {
      * @return
      */
     public static double f1(double x) {
-        return x * x * x;
+        return 1 / (1 + x*x);
     }
 
     /**
@@ -83,7 +83,7 @@ public class Integrals {
      * @return
      */
     public static double f2(double x) {
-        return 1 / (1 + x*x);
+        return x * x * x;
     }
 
     /**

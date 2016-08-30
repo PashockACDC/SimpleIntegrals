@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView iv_f2;
     ProgressBar progressBar;
 
-    Integrals I;
+    static Integrals I;
 
     final int ERROR_EMPTY_FIELDS = -1;
     final int ERROR_EMPTY_FIELD = -2;
