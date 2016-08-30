@@ -74,7 +74,7 @@ public class Integrals {
      * @return
      */
     public static double f1(double x) {
-        return x * x * x;
+        return 1 / (1 + x*x);
     }
 
     /**
@@ -83,7 +83,7 @@ public class Integrals {
      * @return
      */
     public static double f2(double x) {
-        return 1 / (1 + x*x);
+        return x * x * x;
     }
 
     /**
@@ -92,7 +92,7 @@ public class Integrals {
      * @return
      */
     public static double f1_antiderivative(double x) {
-        return x * x * x * x / 4;
+        return Math.atan(x);
     }
 
     /**
@@ -101,7 +101,7 @@ public class Integrals {
      * @return
      */
     public static double f2_antiderivative(double x) {
-        return Math.atan(x);
+        return x * x * x * x / 4;
     }
 
 
@@ -172,14 +172,16 @@ public class Integrals {
         double res;
         dx = (b - a) / n;
         a = a + dx / 2;
-        for (int i = 0; i < n; i++)
-        {
-            x = a + i * dx;
-            if (f1_choose)
+        if (f1_choose)
+            for (int i = 0; i < n; i++) {
+                x = a + i * dx;
                 sum += f1(x);
-            else
+            }
+        else
+            for (int i = 0; i < n; i++) {
+                x = a + i * dx;
                 sum += f2(x);
-        }
+            }
         res = dx * sum;
         MainActivity.res_byMiddleRectangles = res;
         return res;
@@ -196,22 +198,21 @@ public class Integrals {
     public double Calculate_by_trapezium(double a, double b, int n) {
         double res;
         double h = (b - a) / n;  //шаг разбиения
-        if (f1_choose)
-            res = f1(a) / 2 * (a + 1*h - a);
-        else
-            res = f2(a) / 2 * (a + 1*h - a);
         int i;
-        for (i=1; i <= n-1; i++)
-        {
-            if (f1_choose)
+        if (f1_choose) {
+            res = f1(a) / 2 * (a + 1*h - a);
+            for (i=1; i <= n-1; i++) {
                 res += f1(a + i*h) * (a + (i+1)*h - (a + (i-1)*h)) / 2;
-            else
-                res += f2(a + i*h) * (a + (i+1)*h - (a + (i-1)*h)) / 2;
-        }
-        if (f1_choose)
+            }
             res += f1(b) * (b - (a + (i-1)*h));
-        else
+        }
+        else {
+            res = f2(a) / 2 * (a + 1*h - a);
+            for (i=1; i <= n-1; i++) {
+                res += f2(a + i*h) * (a + (i+1)*h - (a + (i-1)*h)) / 2;
+            }
             res += f2(b) * (b - (a + (i-1)*h));
+        }
         MainActivity.res_byTrapeziums = res;
         return res;
     }
@@ -231,24 +232,21 @@ public class Integrals {
         if (f1_choose) {
             res = f1(a);
             res += f1(a + n * h);
+            for (i = 1; i <= n - 1; i++) {
+                if (i % 2 != 0) {
+                    res += 4 * f1(a + i * h);
+                }
+                else {
+                    res += 2 * f1(a + i * h);
+                }
+            }
         }
         else {
             res = f2(a);
             res += f2(a + n * h);
-        }
-
-        for (i = 1; i <= n - 1; i++) {
-            if (i % 2 != 0) {
-                if (f1_choose) {
-                    res += 4 * f1(a + i * h);
-                }
-                else {
+            for (i = 1; i <= n - 1; i++) {
+                if (i % 2 != 0) {
                     res += 4 * f2(a + i * h);
-                }
-            }
-            else {
-                if (f1_choose) {
-                    res += 2 * f1(a + i * h);
                 }
                 else {
                     res += 2 * f2(a + i * h);
