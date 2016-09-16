@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -219,6 +220,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return true;
+    }
+
     /**
      * Проверка на пустоту полей
      * @return ERROR_EMPTY_FIELDS = -1 - все поля пустые
@@ -289,6 +295,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPreExecute() {
             super.onPreExecute();
             rl_ContainsprogressBar.setVisibility(View.VISIBLE);
+            btn_Calculate.setEnabled(false);
         }
 
 
@@ -348,6 +355,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             showCalculatingTime(time_Calc);
             rl_ContainsprogressBar.setVisibility(View.GONE);
+            btn_Calculate.setEnabled(true);
         }
     }
 
